@@ -1,197 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jamuan Bekwoh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f5f0e6, #e8dcc7);
-      overflow-x:hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jamuan Bekwoh</title>
 
-    .container {
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:20px;
-      animation: fadeIn 1.5s ease;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size:4rem;
-      color:#0f2d1f;
-      letter-spacing:3px;
-      animation: slideDown 1s ease;
-    }
+<style>
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    h2 {
-      color:#b89b5e;
-      margin-bottom:10px;
-      letter-spacing:5px;
-    }
+body {
+  font-family:'Poppins', sans-serif;
+  background: linear-gradient(135deg,#f5f0e6,#e8dcc7);
+  overflow-x:hidden;
+  min-height:100vh;
+}
 
-    .card {
-      margin-top:30px;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      border-radius:20px;
-      padding:30px;
-      width:90%;
-      max-width:500px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.15);
-      animation: float 4s ease-in-out infinite;
-    }
+/* background glow */
+body::before {
+  content:'';
+  position:fixed;
+  width:300px;
+  height:300px;
+  background:#b89b5e;
+  filter:blur(120px);
+  opacity:0.2;
+  top:-50px;
+  left:-50px;
+}
 
-    .info {
-      text-align:left;
-      margin:10px 0;
-      font-size:1.1rem;
-    }
+.container {
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  animation: fadeIn 1.5s ease;
+}
 
-    .label {
-      font-weight:600;
-      color:#0f2d1f;
-    }
+h2 {
+  letter-spacing:6px;
+  color:#0f2d1f;
+  opacity:0.8;
+}
 
-    .highlight {
-      color:#b89b5e;
-      font-weight:500;
-    }
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:4rem;
+  color:#0f2d1f;
+  letter-spacing:3px;
+  margin:10px 0;
+}
 
-    .btn {
-      margin-top:20px;
-      padding:12px 25px;
-      border:none;
-      border-radius:30px;
-      background:#0f2d1f;
-      color:white;
-      cursor:pointer;
-      font-size:1rem;
-      transition:0.3s;
-    }
+.card {
+  margin-top:25px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+  border-radius:20px;
+  padding:30px;
+  width:90%;
+  max-width:520px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+  animation: float 4s ease-in-out infinite;
+}
 
-    .btn:hover {
-      background:#b89b5e;
-      transform:scale(1.05);
-    }
+.info {
+  text-align:left;
+  margin:12px 0;
+  font-size:1.05rem;
+}
 
-    .music-btn {
-      position:fixed;
-      bottom:20px;
-      right:20px;
-      background:#0f2d1f;
-      color:white;
-      border:none;
-      border-radius:50%;
-      width:50px;
-      height:50px;
-      cursor:pointer;
-      font-size:18px;
-      box-shadow:0 5px 15px rgba(0,0,0,0.3);
-    }
+.label {
+  font-weight:600;
+  color:#0f2d1f;
+}
 
-    @keyframes fadeIn {
-      from { opacity:0; }
-      to { opacity:1; }
-    }
+.highlight {
+  color:#b89b5e;
+  font-weight:500;
+}
 
-    @keyframes slideDown {
-      from { transform:translateY(-50px); opacity:0; }
-      to { transform:translateY(0); opacity:1; }
-    }
+.btn {
+  margin-top:20px;
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:#0f2d1f;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+  font-size:1rem;
+}
 
-    @keyframes float {
-      0%,100% { transform:translateY(0); }
-      50% { transform:translateY(-10px); }
-    }
+.btn:hover {
+  background:#b89b5e;
+  transform:scale(1.05);
+}
 
-    .sparkle {
-      position:fixed;
-      width:6px;
-      height:6px;
-      background:#b89b5e;
-      border-radius:50%;
-      pointer-events:none;
-      animation: sparkleAnim 1s linear forwards;
-    }
+/* music button */
+.music-btn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  border:none;
+  background:#0f2d1f;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
 
-    @keyframes sparkleAnim {
-      from { opacity:1; transform:scale(1); }
-      to { opacity:0; transform:scale(3); }
-    }
-  </style>
+/* sparkle */
+.sparkle {
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:#b89b5e;
+  border-radius:50%;
+  pointer-events:none;
+  animation: sparkle 1s linear forwards;
+}
+
+@keyframes sparkle {
+  from { transform:scale(1); opacity:1; }
+  to { transform:scale(3); opacity:0; }
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes float {
+  0%,100% {transform:translateY(0);}
+  50% {transform:translateY(-10px);}
+}
+</style>
 </head>
+
 <body>
 
-  <!-- Background Music -->
-  <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+<!-- AUDIO -->
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
-  <div class="container">
-    <h2>JEMPUTAN KE</h2>
-    <h1>JAMUAN BEKWOH</h1>
+<div class="container">
+  <h2>JEMPUTAN KE</h2>
+  <h1>JAMUAN BEKWOH</h1>
 
-    <div class="card">
-      <div class="info"><span class="label">Tarikh:</span> <span class="highlight">11 Mei 2026 (Isnin)</span></div>
-      <div class="info"><span class="label">Masa:</span> <span class="highlight">12.30 tengah hari – 3.00 petang</span></div>
-      <div class="info"><span class="label">Tempat:</span> <span class="highlight">Holiday Villa, Wakaf Che Yeh</span></div>
-      <div class="info"><span class="label">Tema:</span> <span class="highlight">Old Money</span></div>
+  <div class="card">
+    <div class="info"><span class="label">Tarikh:</span> <span class="highlight">11 Mei 2026 (Isnin)</span></div>
+    <div class="info"><span class="label">Masa:</span> <span class="highlight">12.30 tengah hari – 3.00 petang</span></div>
+    <div class="info"><span class="label">Tempat:</span> <span class="highlight">Holiday Villa, Wakaf Che Yeh</span></div>
+    <div class="info"><span class="label">Tema:</span> <span class="highlight">Old Money</span></div>
 
-      <button class="btn" onclick="showMessage()">RSVP</button>
-    </div>
+    <button class="btn" onclick="showMessage()">RSVP</button>
   </div>
+</div>
 
-  <button class="music-btn" onclick="toggleMusic()">🎵</button>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
 
-  <script>
-    const music = document.getElementById("bg-music");
-    let isPlaying = false;
+<script>
+const music = document.getElementById("bg-music");
+music.volume = 0.3;
 
-    // Set soft volume
-    music.volume = 0.25;
+let isPlaying = false;
 
-    function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-      } else {
-        music.play();
-      }
-      isPlaying = !isPlaying;
-    }
+// START MUSIC (best effort autoplay workaround)
+function startMusic() {
+  music.play()
+  .then(() => {
+    isPlaying = true;
+  })
+  .catch(() => {
+    console.log("Autoplay blocked until user interacts");
+  });
+}
 
-    function showMessage() {
-      alert("Kami menantikan kehadiran anda! ✨");
-    }
+// TOGGLE MUSIC
+function toggleMusic() {
+  if (isPlaying) {
+    music.pause();
+    isPlaying = false;
+  } else {
+    startMusic();
+  }
+}
 
-    document.addEventListener("mousemove", function(e) {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.style.left = e.pageX + "px";
-      sparkle.style.top = e.pageY + "px";
-      document.body.appendChild(sparkle);
+// AUTO TRY PLAY
+window.addEventListener("load", startMusic);
 
-      setTimeout(() => {
-        sparkle.remove();
-      }, 1000);
-    });
+// UNLOCK ON FIRST INTERACTION (MOST IMPORTANT PART)
+document.addEventListener("click", () => {
+  if (!isPlaying) startMusic();
+}, { once:true });
 
-    // Auto play after first click (IMPORTANT)
-    document.addEventListener("click", () => {
-      if (!isPlaying) {
-        music.play();
-        isPlaying = true;
-      }
-    }, { once: true });
+// RSVP MESSAGE
+function showMessage() {
+  alert("Kami menantikan kehadiran anda ✨");
+}
 
-  </script>
+/* sparkle effect */
+document.addEventListener("mousemove", (e) => {
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.style.left = e.pageX + "px";
+  s.style.top = e.pageY + "px";
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 1000);
+});
+</script>
+
 </body>
 </html>

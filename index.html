@@ -8,119 +8,93 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:url("background1.png") center/cover no-repeat fixed;
+  overflow-x:hidden;
+  color:white;
 }
 
-body {
-  font-family:'Poppins', sans-serif;
-  background: url("background1.png") center/cover no-repeat fixed;
-  min-height:100vh;
-  overflow:hidden;
-}
-
-/* dark luxury overlay */
-body::before {
+/* dark overlay */
+body::before{
   content:'';
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.35);
+  background:rgba(0,0,0,0.45);
   z-index:0;
 }
 
-/* floating particles */
-.particle {
-  position:fixed;
-  width:4px;
-  height:4px;
-  background:gold;
-  border-radius:50%;
-  pointer-events:none;
-  animation: floatUp 6s linear infinite;
-  opacity:0.7;
-}
-
-@keyframes floatUp {
-  0% { transform:translateY(100vh) scale(0); opacity:0; }
-  50% { opacity:1; }
-  100% { transform:translateY(-10vh) scale(1); opacity:0; }
-}
-
-.container {
+.container{
   position:relative;
   z-index:2;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  color:white;
   padding:20px;
 }
 
-.logo {
-  width:160px;
+/* LOGO */
+.logo{
+  width:140px;
   margin-bottom:10px;
-  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  animation:fadeDown 1s ease;
 }
 
-h2 {
-  letter-spacing:5px;
-  font-weight:400;
-  opacity:0.9;
+/* TEXT */
+h2{
+  letter-spacing:4px;
+  opacity:0.8;
 }
 
-h1 {
-  font-family:'Playfair Display', serif;
+h1{
+  font-family:'Playfair Display',serif;
   font-size:4rem;
-  letter-spacing:3px;
   margin:10px 0;
-  text-shadow:0 5px 20px rgba(0,0,0,0.6);
+  text-shadow:0 10px 30px rgba(0,0,0,0.6);
 }
 
-.card {
+/* CARD */
+.card{
   margin-top:20px;
-  background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:18px;
   padding:25px;
   width:90%;
   max-width:520px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(15px);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.2);
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
 }
 
-.info {
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.info{
   margin:10px 0;
-  font-size:1rem;
 }
 
-.label {
-  font-weight:600;
-  color:#ffd700;
-}
-
-.btn {
+/* BUTTON */
+.btn{
   margin-top:15px;
-  padding:12px 28px;
+  padding:12px 25px;
   border:none;
   border-radius:30px;
   background:#ffd700;
-  color:#000;
-  font-weight:600;
   cursor:pointer;
-  transition:0.3s;
+  font-weight:600;
 }
 
-.btn:hover {
-  transform:scale(1.05);
-  background:white;
-}
-
-/* music button */
-.music-btn {
+/* MUSIC BUTTON */
+.music-btn{
   position:fixed;
   bottom:20px;
   right:20px;
@@ -129,79 +103,192 @@ h1 {
   border-radius:50%;
   border:none;
   background:#ffd700;
-  cursor:pointer;
-  font-size:18px;
-  z-index:3;
+  z-index:5;
+}
+
+/* PARTICLES */
+.particle{
+  position:fixed;
+  width:4px;
+  height:4px;
+  background:gold;
+  border-radius:50%;
+  pointer-events:none;
+  animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(100vh);opacity:0;}
+  50%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  top:-10px;
+  animation:fall 4s linear forwards;
+  z-index:999;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(720deg);
+    opacity:0;
+  }
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown{
+  from{transform:translateY(-20px);opacity:0;}
+  to{transform:translateY(0);opacity:1;}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  h1{font-size:2.5rem;}
+  .logo{width:110px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio id="bg-music" loop>
+<audio id="music" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
 
-  <!-- LOGO (kau punya upload) -->
   <img src="logo.png" class="logo">
 
   <h2>JEMPUTAN KE</h2>
   <h1>JAMUAN BEKWOH</h1>
 
-  <div class="card">
-    <div class="info"><span class="label">Tarikh:</span> 11 Mei 2026 (Isnin)</div>
-    <div class="info"><span class="label">Masa:</span> 12.30 – 3.00 petang</div>
-    <div class="info"><span class="label">Tempat:</span> Holiday Villa, Wakaf Che Yeh</div>
-    <div class="info"><span class="label">Tema:</span> Old Money Luxury</div>
+  <div class="card reveal">
+    <div class="info">📅 11 Mei 2026 (Isnin)</div>
+    <div class="info">⏰ 12.30 – 3.00 petang</div>
+    <div class="info">📍 Holiday Villa, Wakaf Che Yeh</div>
+    <div class="info">✨ Old Money Luxury Theme</div>
 
     <button class="btn" onclick="alert('Kami menantikan kehadiran anda ✨')">
       RSVP
     </button>
   </div>
+
+  <!-- VISUALIZER -->
+  <canvas id="visualizer" style="position:fixed;bottom:0;width:100%;height:120px;z-index:2;"></canvas>
+
 </div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
 <script>
-const music = document.getElementById("bg-music");
+/* ================= MUSIC ================= */
+const music = document.getElementById("music");
 music.volume = 0.3;
 
-let playing = false;
+let isPlaying = false;
 
 function startMusic(){
-  music.play().then(()=> playing = true).catch(()=>{});
+  music.play().then(()=>isPlaying=true).catch(()=>{});
 }
 
 function toggleMusic(){
-  if(playing){
+  if(isPlaying){
     music.pause();
-    playing = false;
-  } else {
+    isPlaying=false;
+  }else{
     startMusic();
   }
 }
 
 window.addEventListener("load", startMusic);
 
-document.addEventListener("click", () => {
-  if(!playing) startMusic();
-}, { once:true });
-
-/* PARTICLES */
-function createParticle(){
-  const p = document.createElement("div");
-  p.className = "particle";
-  p.style.left = Math.random()*100 + "vw";
-  p.style.animationDuration = (3 + Math.random()*5) + "s";
+/* ================= PARTICLES ================= */
+function particle(){
+  const p=document.createElement("div");
+  p.className="particle";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(3+Math.random()*5)+"s";
   document.body.appendChild(p);
+  setTimeout(()=>p.remove(),8000);
+}
+setInterval(particle,300);
 
-  setTimeout(()=> p.remove(), 8000);
+/* ================= CONFETTI ================= */
+function confetti(){
+  for(let i=0;i<80;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=["gold","white","#b89b5e"][Math.floor(Math.random()*3)];
+    c.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
+window.addEventListener("load", confetti);
+
+/* ================= SCROLL REVEAL ================= */
+const card=document.querySelector(".card");
+
+window.addEventListener("scroll",()=>{
+  const top=card.getBoundingClientRect().top;
+  if(top<window.innerHeight){
+    card.classList.add("show");
+  }
+});
+
+/* ================= VISUALIZER ================= */
+const canvas=document.getElementById("visualizer");
+const ctx=canvas.getContext("2d");
+
+let audioCtx, analyser, source;
+
+function initAudio(){
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  analyser=audioCtx.createAnalyser();
+
+  source=audioCtx.createMediaElementSource(music);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  analyser.fftSize=64;
 }
 
-setInterval(createParticle, 300);
+function draw(){
+  requestAnimationFrame(draw);
+
+  const buffer=new Uint8Array(analyser.frequencyBinCount);
+  analyser.getByteFrequencyData(buffer);
+
+  canvas.width=window.innerWidth;
+  canvas.height=120;
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  let barWidth=canvas.width/buffer.length;
+
+  buffer.forEach((v,i)=>{
+    let h=v/2;
+    ctx.fillStyle="gold";
+    ctx.fillRect(i*barWidth,120-h,barWidth-2,h);
+  });
+}
+
+music.addEventListener("play",()=>{
+  if(!audioCtx) initAudio();
+  draw();
+});
+
+/* unlock audio */
+document.addEventListener("click",()=>{
+  startMusic();
+},{once:true});
+
 </script>
 
 </body>

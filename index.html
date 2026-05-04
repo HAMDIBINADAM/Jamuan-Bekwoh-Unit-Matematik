@@ -40,7 +40,7 @@
 
     .card {
       margin-top:30px;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(10px);
       border-radius:20px;
       padding:30px;
@@ -98,7 +98,6 @@
       box-shadow:0 5px 15px rgba(0,0,0,0.3);
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from { opacity:0; }
       to { opacity:1; }
@@ -134,7 +133,7 @@
 
   <!-- Background Music -->
   <audio id="bg-music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+    <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <div class="container">
@@ -151,12 +150,14 @@
     </div>
   </div>
 
-  <!-- Music Control Button -->
   <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
   <script>
     const music = document.getElementById("bg-music");
     let isPlaying = false;
+
+    // Set soft volume
+    music.volume = 0.25;
 
     function toggleMusic() {
       if (isPlaying) {
@@ -183,7 +184,7 @@
       }, 1000);
     });
 
-    // Auto play after first interaction (browser policy safe)
+    // Auto play after first click (IMPORTANT)
     document.addEventListener("click", () => {
       if (!isPlaying) {
         music.play();

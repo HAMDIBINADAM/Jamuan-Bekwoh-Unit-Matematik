@@ -12,18 +12,30 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background:url("background1.png") center/cover no-repeat fixed;
+  background:url("background1.png") center center / cover no-repeat;
   overflow-x:hidden;
   color:white;
+  min-height:100vh;
+  position:relative;
+  animation: bgFade 2s ease-in-out;
 }
 
-/* dark overlay */
+/* CINEMATIC INTRO */
+@keyframes bgFade{
+  from{filter: blur(10px) brightness(0.6); transform: scale(1.05);}
+  to{filter: blur(0) brightness(1); transform: scale(1);}
+}
+
+/* VIGNETTE OVERLAY */
 body::before{
   content:'';
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.45);
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,0.25), rgba(0,0,0,0.75)),
+    linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
   z-index:0;
+  pointer-events:none;
 }
 
 .container{
@@ -146,10 +158,24 @@ h1{
   to{transform:translateY(0);opacity:1;}
 }
 
-/* MOBILE */
+/* VISUALIZER */
+#visualizer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:120px;
+  z-index:2;
+}
+
+/* MOBILE FIX */
 @media(max-width:768px){
   h1{font-size:2.5rem;}
   .logo{width:110px;}
+
+  body{
+    background-attachment: scroll;
+    background-position: center top;
+  }
 }
 </style>
 </head>
@@ -178,14 +204,14 @@ h1{
     </button>
   </div>
 
-  <!-- VISUALIZER -->
-  <canvas id="visualizer" style="position:fixed;bottom:0;width:100%;height:120px;z-index:2;"></canvas>
-
 </div>
 
 <button class="music-btn" onclick="toggleMusic()">🎵</button>
 
+<canvas id="visualizer"></canvas>
+
 <script>
+
 /* ================= MUSIC ================= */
 const music = document.getElementById("music");
 music.volume = 0.3;
@@ -206,6 +232,9 @@ function toggleMusic(){
 }
 
 window.addEventListener("load", startMusic);
+
+/* unlock audio */
+document.addEventListener("click",()=>startMusic(),{once:true});
 
 /* ================= PARTICLES ================= */
 function particle(){
@@ -262,6 +291,8 @@ function initAudio(){
 function draw(){
   requestAnimationFrame(draw);
 
+  if(!analyser) return;
+
   const buffer=new Uint8Array(analyser.frequencyBinCount);
   analyser.getByteFrequencyData(buffer);
 
@@ -283,11 +314,6 @@ music.addEventListener("play",()=>{
   if(!audioCtx) initAudio();
   draw();
 });
-
-/* unlock audio */
-document.addEventListener("click",()=>{
-  startMusic();
-},{once:true});
 
 </script>
 
